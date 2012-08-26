@@ -1,0 +1,9 @@
+<ui>
+	<menubar name="MenuBar">
+		<menu name="ViewMenu" action="View">
+			<placeholder name="ViewMenuModePlaceholder">
+				<menuitem name="SmallWindowMenuItem" action="SmallWindow"/>
+			</placeholder>
+		</menu>
+	</menubar>
+</ui>

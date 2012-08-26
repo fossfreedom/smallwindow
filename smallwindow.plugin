@@ -1,0 +1,9 @@
+[Plugin]
+Loader=python
+Module=smallwindow
+IAge=2
+Name=Small Window
+Description=Provides Small Window mode to rhythmbox.
+Authors=WSID <jongsome@naver.com>
+Copyright=Copyright © 2009 WSID
+Website=http://wsidre.egloos.com/
