@@ -1,26 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <!-- interface-requires gtk+ 3.0 -->
-  <object class="GtkActionGroup" id="small window actions">
-    <child>
-      <object class="GtkAction" id="MainWindow">
-        <property name="icon_name">view-fullscreen</property>
-        <property name="hide_if_empty">False</property>
-        <property name="always_show_image">True</property>
-        <signal name="activate" handler="main_window_action" swapped="no"/>
-      </object>
-    </child>
-    <child>
-      <object class="GtkAction" id="SmallWindow">
-        <property name="label" translatable="yes">Small Window Mode</property>
-        <property name="short_label" translatable="yes">Small Window</property>
-        <property name="tooltip" translatable="yes">Turn on Small Window Mode, which provides simplified playback control.</property>
-        <property name="icon_name">view-restore</property>
-        <signal name="activate" handler="small_window_action" swapped="no"/>
-      </object>
-    </child>
-  </object>
-  
   <object class="GtkWindow" id="small window">
     <property name="type_hint">dialog</property>
     <property name="width_request">500</property>
@@ -157,7 +137,6 @@
           <object class="GtkToolItem" id="restore item">
             <child>
               <object class="GtkButton" id="restore button">
-                <property name="related_action">MainWindow</property>
                 <child>
                   <object class="GtkImage" id="restore image">
                     <property name="icon-name">view-fullscreen</property>
