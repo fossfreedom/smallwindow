@@ -1,7 +1,7 @@
 smallwindow
 ===========
 
-##rework and RB2.99 author
+###rework and RB2.99 author
 
  - fossfreedom <foss.freedom@gmail.com>, website - https://github.com/fossfreedom
 
@@ -26,5 +26,6 @@ This differs in-that it has been updated to work with all versions of
 rhythmbox later that v2.96
 
 Copyright 2009 WSID <jongsome@naver.com>, 2013 fossfreedom <foss.freedom@gmail.com>
+
 original source code - http://wsidre.egloos.com/5684172
 
