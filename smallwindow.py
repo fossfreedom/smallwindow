@@ -14,10 +14,17 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-from gi.repository import GObject, Gdk, GdkPixbuf, Gtk, Peas, RB, GLib
+from gi.repository import GObject
+from gi.repository import Gdk
+from gi.repository import GdkPixbuf
+from gi.repository import Gtk
+from gi.repository import Peas
+from gi.repository import RB
+from gi.repository import GLib
 from small_rb3compat import ActionGroup
 from small_rb3compat import Action
 from small_rb3compat import ApplicationShell
+from small_rb3compat import is_rb3
 
 import rb
 
@@ -98,17 +105,11 @@ class SmallWindow (GObject.Object, Peas.Activatable):
         self.album_art_db = GObject.new( RB.ExtDB, name="album-art" )
 
         # Build up actions.
-        #self.ui_manager = self.shell.props.ui_manager
-        
-        #self.ui_manager.insert_action_group( self.small_window_actions )
-        #self.ui_merge_id = self.ui_manager.add_ui_from_file( 
-        #    rb.find_plugin_file( self,  "interface-ui.xml" ) )
-
         self.action_group = ActionGroup(self.shell, 'small window actions')
-        #action = self.action_group.add_action(func=self.main_window_action,
-         #   action_name='MainWindow')
-        action = self.action_group.add_action(func=self.small_window_action,
-            action_name='SmallWindow', label='Small Window',
+        action = self.action_group.add_action(
+            func=self.small_window_action,
+            action_name='SmallWindow', 
+            label='Small Window',
             action_type='app')
 
         self._appshell = ApplicationShell(self.shell)
@@ -138,28 +139,26 @@ class SmallWindow (GObject.Object, Peas.Activatable):
             geometry,
             Gdk.WindowHints.MIN_SIZE | Gdk.WindowHints.MAX_SIZE )
 
-        self.shell.props.application.add_window(self.small_window)
-        # Bring Builtin Actions to plugin
-        main_actions_group = None
-        #for agroup in self.ui_manager.get_action_groups():
-        #    if( agroup.get_name() == "MainActions" ):
-        #        main_actions_group = agroup
-        #        break
-        
-        #for (a, b) in ((self.play_button, "ControlPlay"),
-        #               (self.prev_button, "ControlPrevious"),
-        #               (self.next_button, "ControlNext"),
-        #               (self.repeat_toggle, "ControlRepeat"),
-        #               (self.shuffle_toggle, "ControlShuffle")):
-        for (a, b) in ((self.play_button, "play"),
-                       (self.prev_button, "play-previous"),
-                       (self.next_button, "play-next"),
-                       (self.repeat_toggle, "play-repeat"),
-                       (self.shuffle_toggle, "play-shuffle")):
-            a.set_action_name("app." + b)
-            if b == "play-repeat" or b == "play-shuffle":
-                a.set_action_target_value(GLib.Variant("b", True))
-            
+        if is_rb3():
+            self.shell.props.application.add_window(self.small_window)
+            # Bring Builtin Actions to plugin
+            for (a, b) in ((self.play_button, "play"),
+                           (self.prev_button, "play-previous"),
+                           (self.next_button, "play-next"),
+                           (self.repeat_toggle, "play-repeat"),
+                           (self.shuffle_toggle, "play-shuffle")):
+                a.set_action_name("app." + b)
+                if b == "play-repeat" or b == "play-shuffle":
+                    a.set_action_target_value(GLib.Variant("b", True))
+        else:
+            # Bring Builtin Actions to plugin
+            for (a, b) in ((self.play_button, "ControlPlay"),
+                           (self.prev_button, "ControlPrevious"),
+                           (self.next_button, "ControlNext"),
+                           (self.repeat_toggle, "ControlRepeat"),
+                           (self.shuffle_toggle, "ControlShuffle")):
+                a.set_related_action( self._appshell.get_action( "MainActions", b ))
+                
         # Bind needed properites.
         self.bind_title = GObject.Binding(  source = self.main_window,
                                             source_property = "title",
@@ -182,12 +181,6 @@ class SmallWindow (GObject.Object, Peas.Activatable):
         
         del self.bind_title
         self._appshell.cleanup()
-        #self.ui_manager.remove_action_group( self.small_window_actions )
-        #self.ui_manager.remove_ui( self.ui_merge_id )
-        
-        #del self.ui_merge_id
-        #del self.ui_manager
-        
         del self.album_art_db
         
         self.purge_builder_content()
