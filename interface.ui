@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <!-- interface-requires gtk+ 3.0 -->
-  <object class="GtkWindow" id="small window">
+  <object class="GtkApplicationWindow" id="small window">
     <property name="type_hint">dialog</property>
     <property name="width_request">500</property>
     <signal name="delete-event" handler="small_window_on_close" swapped="no"/>

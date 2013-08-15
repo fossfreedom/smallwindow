@@ -138,6 +138,7 @@ class SmallWindow (GObject.Object, Peas.Activatable):
             geometry,
             Gdk.WindowHints.MIN_SIZE | Gdk.WindowHints.MAX_SIZE )
 
+        self.shell.props.application.add_window(self.small_window)
         # Bring Builtin Actions to plugin
         main_actions_group = None
         #for agroup in self.ui_manager.get_action_groups():
@@ -145,15 +146,18 @@ class SmallWindow (GObject.Object, Peas.Activatable):
         #        main_actions_group = agroup
         #        break
         
-        for (a, b) in ((self.play_button, "ControlPlay"),
-                       (self.prev_button, "ControlPrevious"),
-                       (self.next_button, "ControlNext"),
-                       (self.repeat_toggle, "ControlRepeat"),
-                       (self.shuffle_toggle, "ControlShuffle")):
-            #a.set_related_action( main_actions_group.get_action( b ) )
-            action = self._appshell.lookup_action('MainActions', b)
-            action.associate_menuitem(a)
-        
+        #for (a, b) in ((self.play_button, "ControlPlay"),
+        #               (self.prev_button, "ControlPrevious"),
+        #               (self.next_button, "ControlNext"),
+        #               (self.repeat_toggle, "ControlRepeat"),
+        #               (self.shuffle_toggle, "ControlShuffle")):
+        for (a, b) in ((self.play_button, "play"),
+                       (self.prev_button, "play-previous"),
+                       (self.next_button, "play-next"),
+                       (self.repeat_toggle, "play-repeat"),
+                       (self.shuffle_toggle, "play-shuffle")):
+            a.set_action_name("app." + b)
+            
         # Bind needed properites.
         self.bind_title = GObject.Binding(  source = self.main_window,
                                             source_property = "title",
@@ -253,7 +257,8 @@ class SmallWindow (GObject.Object, Peas.Activatable):
     
     def _sh_bigger_cover( self, cover, x, y, key, tooltip ):
         if( self.cover_pixbuf is not None ):
-            tooltip.set_icon( self.cover_pixbuf )
+            tooltip.set_icon( self.cover_pixbuf.scale_simple( 300, 300,
+                                                          GdkPixbuf.InterpType.HYPER ) )
             return True
         else:
             return False
