@@ -14,7 +14,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-from gi.repository import GObject, Gdk, GdkPixbuf, Gtk, Peas, RB
+from gi.repository import GObject, Gdk, GdkPixbuf, Gtk, Peas, RB, GLib
 from small_rb3compat import ActionGroup
 from small_rb3compat import Action
 from small_rb3compat import ApplicationShell
@@ -157,6 +157,8 @@ class SmallWindow (GObject.Object, Peas.Activatable):
                        (self.repeat_toggle, "play-repeat"),
                        (self.shuffle_toggle, "play-shuffle")):
             a.set_action_name("app." + b)
+            if b == "play-repeat" or b == "play-shuffle":
+                a.set_action_target_value(GLib.Variant("b", True))
             
         # Bind needed properites.
         self.bind_title = GObject.Binding(  source = self.main_window,
