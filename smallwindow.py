@@ -118,7 +118,10 @@ class SmallWindow (GObject.Object, Peas.Activatable):
         
         # Build up small window interface
         builder = Gtk.Builder()
-        builder.add_from_file( rb.find_plugin_file( self, "interface.ui" ) )
+        if is_rb3():
+            builder.add_from_file( rb.find_plugin_file( self, "interface_rb3.ui" ) )
+        else:
+            builder.add_from_file( rb.find_plugin_file( self, "interface_rb2.ui" ) )
         self.load_builder_content( builder )
         self.connect_builder_content( builder )
         restore = builder.get_object('restore button')
@@ -157,7 +160,7 @@ class SmallWindow (GObject.Object, Peas.Activatable):
                            (self.next_button, "ControlNext"),
                            (self.repeat_toggle, "ControlRepeat"),
                            (self.shuffle_toggle, "ControlShuffle")):
-                a.set_related_action( self._appshell.get_action( "MainActions", b ))
+                a.set_related_action( self._appshell.lookup_action( "MainActions", b ).action)
                 
         # Bind needed properites.
         self.bind_title = GObject.Binding(  source = self.main_window,
