@@ -1,7 +1,7 @@
 smallwindow
 ===========
 
-###rework and RB2.99 author
+###rework and RB2.99 and later author
 
  - fossfreedom <foss.freedom@gmail.com>, website - https://github.com/fossfreedom
 
@@ -24,6 +24,25 @@ Note: This is a derivative of the same name created by the copyright owner below
 
 This differs in-that it has been updated to work with all versions of
 rhythmbox later that v2.96
+
+Installation:
+
+<code>
+git clone https://github.com/fossfreedom/smallwindow
+cd smallwindow
+</code>
+
+for rhythmbox 2.96 to 2.99.1
+
+<code>
+./install.sh
+</code>
+
+for rhythbox 3.0 and later
+
+<code>
+./install.sh --rb3
+</code>
 
 Copyright 2009 WSID <jongsome@naver.com>, 2013 fossfreedom <foss.freedom@gmail.com>
 
