@@ -27,10 +27,8 @@ rhythmbox later that v2.96
 
 Installation:
 
-<code>
-git clone https://github.com/fossfreedom/smallwindow
-cd smallwindow
-</code>
+    git clone https://github.com/fossfreedom/smallwindow
+    cd smallwindow
 
 for rhythmbox 2.96 to 2.99.1
 
