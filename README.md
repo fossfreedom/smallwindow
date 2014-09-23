@@ -1,7 +1,6 @@
 smallwindow
 ===========
 
-###rework and RB2.99 and later author
 
  - fossfreedom <foss.freedom@gmail.com>, website - https://github.com/fossfreedom
 
@@ -9,7 +8,7 @@ smallwindow
 
 -------
 
-Brings back rhythmbox small window mode
+Brings back Rhythmbox small window mode
 
 Current Functions.
 
@@ -23,14 +22,14 @@ Released under GPL2+ license
 Note: This is a derivative of the same name created by the copyright owner below.
 
 This differs in-that it has been updated to work with all versions of
-rhythmbox later that v2.96
+Rhythmbox later than v2.96
 
 Installation:
 
     git clone https://github.com/fossfreedom/smallwindow
     cd smallwindow
 
-for rhythmbox 2.96 to 2.99.1
+for Rhythmbox 2.96 to 2.99.1
 
 <code>
 ./install.sh
