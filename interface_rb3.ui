@@ -24,6 +24,14 @@
                 </style>
                 <child>
                   <object class="GtkToggleButton" id="repeat toggle">
+                        <property name="visible">True</property>
+                        <property name="can_focus">True</property>
+                        <property name="receives_default">True</property>
+                        <property name="action_name">app.play-previous</property>
+                        <property name="always_show_image">True</property>
+                        <style>
+                          <class name="raised"/>
+                        </style>
                     <child>
                       <object class="GtkImage" id="repeat image">
                         <property name="icon-name">media-playlist-repeat</property>

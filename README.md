@@ -41,7 +41,7 @@ for rhythbox 3.0 and later
 ./install.sh --rb3
 </code>
 
-Copyright 2009 WSID <jongsome@naver.com>, 2013 fossfreedom <foss.freedom@gmail.com>
+Copyright 2009 WSID <jongsome@naver.com>, 2014 fossfreedom <foss.freedom@gmail.com>
 
 original source code - http://wsidre.egloos.com/5684172
 
